@@ -40,15 +40,6 @@ if uploaded:
             try:
                 pipe = joblib.load(model_path)
                 df["fraud_score"] = pipe.predict_proba(df)[:, 1]
-                #333333
-                df['fraud_score'] = probs
-                df['risk_label'] = (df['fraud_score'] >= 0.50).astype(int)
-                df['risk_category'] = df['fraud_score'].apply(
-                lambda x: 'High Risk' if x >= 0.75 else ('Medium Risk' if x >= 0.50 else 'Low Risk')
-                )
-
-                st.success("Scoring completed!")
-#3333333333
                 st.dataframe(df.head(50))
 
             except Exception as e:
